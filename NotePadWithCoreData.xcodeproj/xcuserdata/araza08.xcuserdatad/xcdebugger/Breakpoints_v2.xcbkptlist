@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "29567693-3D78-4F4F-9C20-2F659C742BCC"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NotePadWithCoreData/Controller/NotesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "NotesViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - a9640e249f5dfd16"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.notesTableView.getter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "85">
+               </Location>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - f7a039ee161312e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.notesTableView.setter : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "136">
+               </Location>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - 45d9ce6784215815"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.notesTableView.modify : Swift.Optional&lt;__C.UITableView&gt;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - d752400823b4f780"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.notesTableView.modify : Swift.Optional&lt;__C.UITableView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "26">
+               </Location>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - d2b1af0fe207c1b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; NotePadWithCoreData.NotesViewController"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "302F74D5-2C1C-47F5-B5D7-40BC7B852D4E - a612f7d33aaebe78"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;NotePadWithCoreData.NotesViewController&gt;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "149">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NotePadWithCoreData/Controller/NotesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "NotesViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - 8d37cb8d0c0fc101"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.viewModel.getter : NotePadWithCoreData.NoteViewModel"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "90">
+               </Location>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - 2cd46e309679ed0d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.viewModel.setter : NotePadWithCoreData.NoteViewModel"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - 9dd0db4c730e5402"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.viewModel.modify : NotePadWithCoreData.NoteViewModel"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - 26d49cb923f0dacb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.viewModel.modify : NotePadWithCoreData.NoteViewModel with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "15">
+               </Location>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - d2b1af0fe207c21b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; NotePadWithCoreData.NotesViewController"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "274">
+               </Location>
+               <Location
+                  uuid = "53F6529D-CB47-408E-A300-2A25D8FEFDE1 - a612f7d33aaebddb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NotePadWithCoreData.NotesViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;NotePadWithCoreData.NotesViewController&gt;"
+                  moduleName = "NotePadWithCoreData"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/araza08/Data/GitHub/NotePadWithCoreData/NotePadWithCoreData/Controller/NotesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "231">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

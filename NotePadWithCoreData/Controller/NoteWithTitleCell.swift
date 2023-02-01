@@ -13,6 +13,8 @@ class NoteWithTitleCell: UITableViewCell {
     @IBOutlet weak var noteDescription: UILabel!
     @IBOutlet weak var noteDateTime: UILabel!
     
+    static let CELL_IDENTIFIER = "NoteWithTitleCell"
+    static let nib = UINib(nibName: CELL_IDENTIFIER, bundle: Bundle.main)
     
     override func awakeFromNib() {
         super.awakeFromNib()
