@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD26FA0C298B9B520084367D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA0B298B9B520084367D /* Constants.swift */; };
 		DD2A9C332987D08E00032355 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A9C322987D08E00032355 /* TodoViewModel.swift */; };
 		DD2A9C352987D0A600032355 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A9C342987D0A600032355 /* NoteViewModel.swift */; };
 		DD38929F2982B53100F9849D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38929E2982B53100F9849D /* AppDelegate.swift */; };
@@ -27,9 +28,11 @@
 		DD5C191829890BA60063C0D1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5C191729890BA60063C0D1 /* Utils.swift */; };
 		DD5C191A2989154C0063C0D1 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5C19192989154B0063C0D1 /* NotesViewController.swift */; };
 		DD5C191C298915640063C0D1 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5C191B298915640063C0D1 /* TodosViewController.swift */; };
+		DD5C191E298B953B0063C0D1 /* SingleNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5C191D298B953B0063C0D1 /* SingleNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD26FA0B298B9B520084367D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD2A9C322987D08E00032355 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		DD2A9C342987D0A600032355 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		DD38929B2982B53100F9849D /* NotePadWithCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotePadWithCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +55,7 @@
 		DD5C191729890BA60063C0D1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DD5C19192989154B0063C0D1 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		DD5C191B298915640063C0D1 /* TodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewController.swift; sourceTree = "<group>"; };
+		DD5C191D298B953B0063C0D1 /* SingleNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 				DD5C1914298909E50063C0D1 /* NoteWithTitleCell.swift */,
 				DD5C19192989154B0063C0D1 /* NotesViewController.swift */,
 				DD5C191B298915640063C0D1 /* TodosViewController.swift */,
+				DD5C191D298B953B0063C0D1 /* SingleNoteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				DD5C191729890BA60063C0D1 /* Utils.swift */,
+				DD26FA0B298B9B520084367D /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -226,9 +232,11 @@
 				DD3892A92982B53100F9849D /* NotePadWithCoreData.xcdatamodeld in Sources */,
 				DD5C1913298909990063C0D1 /* NoteWithoutTitleCell.swift in Sources */,
 				DD5C191C298915640063C0D1 /* TodosViewController.swift in Sources */,
+				DD5C191E298B953B0063C0D1 /* SingleNoteViewController.swift in Sources */,
 				DD3892BE2987AA3E00F9849D /* Todo.swift in Sources */,
 				DD5C1915298909E50063C0D1 /* NoteWithTitleCell.swift in Sources */,
 				DD2A9C352987D0A600032355 /* NoteViewModel.swift in Sources */,
+				DD26FA0C298B9B520084367D /* Constants.swift in Sources */,
 				DD3892C02987BCC900F9849D /* Note.swift in Sources */,
 				DD3892A32982B53100F9849D /* ViewController.swift in Sources */,
 				DD5C191A2989154C0063C0D1 /* NotesViewController.swift in Sources */,
