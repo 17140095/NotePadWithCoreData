@@ -12,6 +12,7 @@ class SingleNoteViewController: UIViewController {
     @IBOutlet weak var titlefield: UITextField!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +23,8 @@ class SingleNoteViewController: UIViewController {
         
         saveButton.tintColor = Constants.themeColor
         
-
         textView.delegate = self
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -32,23 +32,31 @@ class SingleNoteViewController: UIViewController {
     }
     
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func deleteButton(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Delete Note", message: "Are you sure to delete this note?", preferredStyle: .alert)
+        alert.view.tintColor = Constants.themeColor
+        
+     
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        let deleteAction = UIAlertAction(title: "Yes", style: .destructive, handler: { action in
+            self.deleteNote()
+        })
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        present(alert, animated: true)
     }
-    */
+    
+    private func deleteNote(){
+        print("Note deleted")
+        self.navigationController?.popViewController(animated: true)
+    }
 
 }
 
 extension SingleNoteViewController: UITextViewDelegate{
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        saveButton.isHidden = textView.text.isEmpty ? true: false
-//    }
    
     func textViewDidChange(_ textView: UITextView) {
         saveButton.isHidden = (titlefield.text?.isEmpty ?? true && textView.text.isEmpty) ? true: false

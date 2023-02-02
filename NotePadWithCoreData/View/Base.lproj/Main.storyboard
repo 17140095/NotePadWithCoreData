@@ -177,14 +177,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bpx-ur-5FX">
-                        <barButtonItem key="rightBarButtonItem" title="Save" image="checkmark.circle.fill" catalog="system" id="X9e-my-W20">
-                            <connections>
-                                <action selector="saveButtonAction:" destination="kue-DD-6ax" id="cy2-qi-dai"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Save" image="checkmark.circle.fill" catalog="system" id="X9e-my-W20">
+                                <connections>
+                                    <action selector="saveButtonAction:" destination="kue-DD-6ax" id="cy2-qi-dai"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="rqC-0J-wee">
+                                <imageReference key="image" image="trash" catalog="system" renderingMode="original"/>
+                                <connections>
+                                    <action selector="deleteButton:" destination="kue-DD-6ax" id="L1V-cC-R4g"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="date" destination="fdu-Lg-VlH" id="2vw-34-b3T"/>
+                        <outlet property="deleteButton" destination="rqC-0J-wee" id="yN5-WH-9gW"/>
                         <outlet property="saveButton" destination="X9e-my-W20" id="dxh-2L-sYV"/>
                         <outlet property="textView" destination="QVV-lf-mkq" id="eEV-gL-cTH"/>
                         <outlet property="titlefield" destination="2nX-IE-90M" id="XYd-tb-rCk"/>
@@ -328,6 +337,7 @@
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
         <image name="note.text" catalog="system" width="128" height="107"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

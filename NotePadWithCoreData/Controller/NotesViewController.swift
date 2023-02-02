@@ -22,6 +22,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
 
         UITextField.appearance().tintColor = Constants.themeColor
         UITextView.appearance().tintColor = Constants.themeColor
+        
         addNote.tintAdjustmentMode = .normal
         
         notesTableView.delegate = self
