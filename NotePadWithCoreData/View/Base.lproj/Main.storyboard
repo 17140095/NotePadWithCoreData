@@ -97,7 +97,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" cornerStyle="capsule"/>
                                 <connections>
-                                    <segue destination="kue-DD-6ax" kind="push" id="jaQ-Ur-h20"/>
+                                    <segue destination="kue-DD-6ax" kind="push" identifier="SingleNoteViewController" id="jaQ-Ur-h20"/>
                                 </connections>
                             </button>
                         </subviews>

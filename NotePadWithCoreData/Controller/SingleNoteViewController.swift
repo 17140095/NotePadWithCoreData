@@ -14,17 +14,29 @@ class SingleNoteViewController: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
+    
+   
+    var note: Note?
+    var isNewNote: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isNewNote {
+            print("This is new note")
+        }else{
+            print("This is edit note")
+        }
         titlefield.font = UIFont(name: "System", size: 20)
         titlefield.delegate = self
+        titlefield.text = note?.title
         
-        date.text = Utils.getStringFromDate(date: Date())
-        
-        saveButton.tintColor = Constants.themeColor
+        date.text = Utils.getStringFromDate(date: note?.dateTime ?? Date())
         
         textView.delegate = self
+        textView.text = note?.description
         
+        saveButton.tintColor = Constants.themeColor
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {

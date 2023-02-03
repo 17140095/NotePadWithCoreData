@@ -17,4 +17,7 @@ class Note{
         self.description = description
         self.dateTime = dateTime
     }
+    func display(){
+        print("Title: \(String(describing: title)), Desc: \(description), date: \(String(describing: Utils.getStringFromDate(date: dateTime)))")
+    }
 }

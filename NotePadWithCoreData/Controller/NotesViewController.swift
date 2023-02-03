@@ -15,6 +15,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     var viewModel: NoteViewModel = NoteViewModel()
     var data: [Note] = [Note]()
     
+    var selectNote: Note?
     
     
     override func viewDidLoad() {
@@ -46,13 +47,24 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectNote = nil
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backButton = UIBarButtonItem()
         backButton.tintColor = Constants.themeColor
         backButton.title = "Notes"
-        
         navigationItem.backBarButtonItem = backButton
+        
+        if segue.destination is SingleNoteViewController, nil != selectNote {
+            let vc = segue.destination as? SingleNoteViewController
+            vc?.note = selectNote
+            vc?.isNewNote = false
+        }
+    
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -137,6 +149,16 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.addSubview(seprator)
       
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let indexPathOfRow = notesTableView.indexPathForSelectedRow {
+            selectNote = data[indexPathOfRow.row]
+            print("Selected Row")
+            selectNote?.display()
+            
+            performSegue(withIdentifier: "SingleNoteViewController", sender: self)
+        }
     }
  
 }
