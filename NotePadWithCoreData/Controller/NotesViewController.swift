@@ -13,9 +13,9 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addNote: UIButton!
     
     var viewModel: NoteViewModel = NoteViewModel()
-    var data: [Note] = [Note]()
+    var data: [NoteModel] = [NoteModel]()
     
-    var selectNote: Note?
+    var selectNote: NoteModel?
     
     
     override func viewDidLoad() {
@@ -51,6 +51,8 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         selectNote = nil
+        data = [NoteModel]()
+        referesh()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,7 +64,6 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         if segue.destination is SingleNoteViewController, nil != selectNote {
             let vc = segue.destination as? SingleNoteViewController
             vc?.note = selectNote
-            vc?.isNewNote = false
         }
     
     }
@@ -71,8 +72,8 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
        // print("Search happing.....")
         print("All count: \(viewModel.notes.count)")
         let data = viewModel.notes.filter { note in
-            print("Title: \(note.title)\tDescription: \(note.description)\t searchKey: \(search.text)\n")
-            if let key = search.text, (note.title?.containsIgnoreCase(key) ?? false || note.description.containsIgnoreCase(key)){
+            print("Title: \(note.title)\tDescription: \(note.desc)\t searchKey: \(search.text)\n")
+            if let key = search.text, (note.title?.containsIgnoreCase(key) ?? false || note.desc?.containsIgnoreCase(key) ?? false){
                 return true
             }
              return false
@@ -95,15 +96,12 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         self.notesTableView.reloadData()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func referesh(){
+        print("Current count: \(CoreDB.getInstance().getAllNotes().count)")
+        CoreDB.getInstance().context.reset()
+        data = viewModel.getNotes()
+        notesTableView.reloadData()
     }
-    */
 
 }
 
@@ -112,12 +110,12 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         data.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let note: Note = data[indexPath.row]
+        let note: NoteModel = data[indexPath.row]
     
         if nil == note.title{
             let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithoutTitleCell
             cell?.noteTitle.text = note.description
-            cell?.noteDateTime.text = Utils.getStringFromDate(date: note.dateTime)
+            cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
             
             cell?.clipsToBounds = true
             cell?.layer.cornerRadius = 10
@@ -126,8 +124,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
            
             let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithTitleCell
             cell?.noteTitle.text = note.title
-            cell?.noteDescription.text = note.description
-            cell?.noteDateTime.text = Utils.getStringFromDate(date: note.dateTime)
+            cell?.noteDescription.text = note.desc
+            cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
             
             cell?.clipsToBounds = true
             cell?.layer.cornerRadius = 10

@@ -16,13 +16,13 @@ class SingleNoteViewController: UIViewController {
     
     
    
-    var note: Note?
-    var isNewNote: Bool = true
+    var note: NoteModel?
+    //var isNewNote: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if isNewNote {
+        if nil == note {
             print("This is new note")
         }else{
             print("This is edit note")
@@ -31,16 +31,55 @@ class SingleNoteViewController: UIViewController {
         titlefield.delegate = self
         titlefield.text = note?.title
         
-        date.text = Utils.getStringFromDate(date: note?.dateTime ?? Date())
+        date.text = Utils.getStringFromDate(date: note?.date ?? Date())
         
         textView.delegate = self
-        textView.text = note?.description
+        textView.text = note?.desc
         
         saveButton.tintColor = Constants.themeColor
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {
         print("Save Note tap")
+        
+        
+        
+        if nil == note {
+            let newN = NoteModel(entity: CoreDB.getInstance().notesEntity, insertInto: CoreDB.getInstance().context)
+            newN.title = titlefield.text ?? ""
+            newN.desc = textView.text ?? ""
+            newN.date = Date()
+            
+            if CoreDB.getInstance().save(){
+                let alert = UIAlertController(title: "Add Note", message: "Successfully saved note.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
+                    self.navigationController?.popViewController(animated: true)
+                })
+//                let alert = Custome.getAlert(title: "Add Note", message: "Successfully saved note.")
+                present(alert, animated: true)
+            }else{
+                let alert = Custome.getAlert(title: "Error", message: "Note dose not saved. There some error.")
+                present(alert, animated: true)
+            }
+            
+           
+        }else{
+            note?.title = titlefield.text ?? ""
+            note?.desc = textView.text ?? ""
+            note?.date = Date()
+            if CoreDB.getInstance().save() {
+                let alert = UIAlertController(title: "Update Note", message: "Successfully update note.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                //let alert = Custome.getAlert(title: "Update Note", message: "Successfully update note.")
+                present(alert, animated: true)
+            }else{
+                let alert = Custome.getAlert(title: "Error", message: "Note dose not update. There some error.")
+                present(alert, animated: true)
+            }
+        }
+        
     }
     
     
@@ -63,6 +102,9 @@ class SingleNoteViewController: UIViewController {
     
     private func deleteNote(){
         print("Note deleted")
+        if let note = self.note {
+            CoreDB.getInstance().context.delete(note)
+        }
         self.navigationController?.popViewController(animated: true)
     }
 
