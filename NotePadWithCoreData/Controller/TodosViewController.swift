@@ -9,21 +9,84 @@ import UIKit
 
 class TodosViewController: UIViewController {
 
+    @IBOutlet weak var todosTableView: UITableView!
+    @IBOutlet weak var search: UITextField!
+    @IBOutlet weak var addButton: UIButton!
+    
+    let viewModel = TodoViewModel()
+    
+    var data: [Todo] = [Todo]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        UITextField.appearance().tintColor = Constants.themeColor
+        UITextView.appearance().tintColor = Constants.themeColor
+        
+        todosTableView.delegate = self
+        todosTableView.dataSource = self
+        todosTableView.register(TodoCell.nib, forCellReuseIdentifier: TodoCell.CELL_IDENTIFIER)
+        
+        addButton.tintColor = Constants.themeColor
+        
+        search.cornerRadius(radius: search.frame.height/2)
+        
+        referesh()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        referesh()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addTodoAction(_ sender: Any) {
+        
     }
-    */
+    
+    func referesh(){
+        data = viewModel.getTodos()
+        print("todo count: \(data.count)")
+        search.text = ""
+        handleBackgroundTableView()
+    }
 
+    private func handleBackgroundTableView(){
+        if data.count<=0 {
+            todosTableView.setBackgroundMessage(message: "No todo found")
+            print("Set todo background")
+        }else{
+            todosTableView.clearBackgroundMessage()
+        }
+        todosTableView.separatorInset = UIEdgeInsets.zero
+        todosTableView.reloadData()
+    }
+}
+
+extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
+
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.getTodos().count
+    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        viewModel.getCompletedTodo().count>0 ? 2: 1
+//    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let todo = data[indexPath.row]
+        
+        print("For cell todo")
+        todo.display()
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.CELL_IDENTIFIER, for: indexPath) as? TodoCell
+        cell?.todoTask.text = todo.task
+        
+        return cell ?? UITableViewCell()
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+    }
+}
+
+extension TodosViewController: UITextFieldDelegate{
+    
 }

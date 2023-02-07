@@ -6,4 +6,8 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Todo" representedClassName=".Todo" syncable="YES">
+        <attribute name="isDone" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="task" optional="YES" attributeType="String"/>
+    </entity>
 </model>

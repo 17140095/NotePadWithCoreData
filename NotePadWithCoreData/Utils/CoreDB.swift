@@ -13,9 +13,10 @@ class CoreDB{
     var context: NSManagedObjectContext
     
     var notesEntity: NSEntityDescription
+    var todosEntity: NSEntityDescription
     
     private let ENTITY_NOTE = "NoteModel"
-    private let ENTITY_TODO = "TodoModel"
+    private let ENTITY_TODO = "Todo"
     
     private static let instance = CoreDB()
     
@@ -23,6 +24,7 @@ class CoreDB{
         self.appDelegate = UIApplication.shared.delegate as? AppDelegate
         self.context = (appDelegate?.persistentContainer.viewContext)!
         self.notesEntity = NSEntityDescription.entity(forEntityName: ENTITY_NOTE, in: context)!
+        self.todosEntity = NSEntityDescription.entity(forEntityName: ENTITY_TODO, in: context)!
         //deleteAllNotes()
     }
     
@@ -54,9 +56,22 @@ class CoreDB{
             print("fetch Request: \(fetchRequest)")
             temp = try context.fetch(fetchRequest)
         }catch{
-            print("Retrieve failded")
+            print("Retrieve notes failded")
         }
         
+        return temp
+    }
+    func getAllTodos()-> [Todo]{
+        print("Real all todos")
+        var temp = [Todo]()
+        
+        do{
+            let fetchRequest = Todo.fetchRequest()
+            print("Fetch Request: \(fetchRequest)")
+            temp = try context.fetch(fetchRequest)
+        }catch{
+            print("Retrieve todos failed")
+        }
         return temp
     }
 
@@ -78,9 +93,8 @@ struct EntityNote{
     static let description = "desc"
     static let date = "date"
 }
-//
-//struct EntityTodo{
-//    static let title = "title"
-//    static let description = "desc"
-//    static let date = "date"
-//}
+
+struct EntityTodo{
+    static let task = "task"
+    static let isDone = "isDone"
+}

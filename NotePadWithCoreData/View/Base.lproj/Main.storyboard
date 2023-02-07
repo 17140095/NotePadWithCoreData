@@ -38,6 +38,9 @@
                                 <color key="tintColor" red="0.23921568630000001" green="0.69803921570000005" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" image="plus" catalog="system" cornerStyle="capsule"/>
+                                <connections>
+                                    <action selector="addTodoAction:" destination="jCB-YF-Y9W" eventType="touchUpInside" id="kSq-Wx-ET8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vGM-4w-tbr"/>
@@ -58,6 +61,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1jQ-1f-KAk"/>
+                    <connections>
+                        <outlet property="addButton" destination="5NL-rR-51p" id="W6Y-C7-FJ7"/>
+                        <outlet property="search" destination="qLM-dC-nFH" id="dJ7-Y4-x8U"/>
+                        <outlet property="todosTableView" destination="24N-TS-Rin" id="8Wb-ct-nK4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uir-VS-C1J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

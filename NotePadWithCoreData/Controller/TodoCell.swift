@@ -11,10 +11,19 @@ class TodoCell: UITableViewCell {
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var todoTask: UILabel!
 
-
+    var selectedTodo: Todo?
+    static let CELL_IDENTIFIER = "TodoCell"
+    static let nib = UINib(nibName: CELL_IDENTIFIER, bundle: Bundle.main)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        if let t = selectedTodo{
+            t.display()
+        }else{
+            print("Todo is nil for cell")
+        }
+        todoTask.text = selectedTodo?.task
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
