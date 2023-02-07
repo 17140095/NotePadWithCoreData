@@ -45,94 +45,21 @@ class CoreDB{
         }
     }
     
-    func getAllNotes()->[NoteModel]{
-        context.reset()
+    func getAllNotes()->[NoteModel] {
         print("Read all notes")
         var temp = [NoteModel]()
         
-        let fetchRequest =  NoteModel.fetchRequest()
-        print("fetch Request: \(fetchRequest)")
-        
-        
         do {
-            let result = try context.fetch(fetchRequest)
-            
-            for data in result  {
-                let title = data.value(forKey: EntityNote.title) as! String?
-                let desc = data.value(forKey: EntityNote.description) as! String
-                let date = data.value(forKey: EntityNote.date) as? Date
-                let id = data.value(forKey: EntityNote.id) as? UUID
-                
-                let n = NoteModel(entity: notesEntity, insertInto: context)
-                n.title = title
-                n.desc = desc
-                n.date = date
-                n.id = id
-                
-                temp.append(n)
-            }
+            let fetchRequest =  NoteModel.fetchRequest()
+            print("fetch Request: \(fetchRequest)")
+            temp = try context.fetch(fetchRequest)
         }catch{
             print("Retrieve failded")
         }
         
-        
         return temp
     }
-    
-    func saveNote(note: NoteModel)-> Bool{
-        var toReturn: Bool = true
-        
-        print(note)
-        if let noteEntity = NSEntityDescription.entity(forEntityName: ENTITY_NOTE, in: context){
-            let noteToSave = NSManagedObject(entity: noteEntity, insertInto: context)
-            noteToSave.setValue(note.title, forKey: EntityNote.title)
-            noteToSave.setValue(note.desc, forKey: EntityNote.description)
-            noteToSave.setValue(note.date, forKey: EntityNote.date)
-            noteToSave.setValue(note.id, forKey: EntityNote.id)
-            
-            do{
-                try context.save()
-            }catch let error as NSError{
-                print("Could not save. \(error), \(error.userInfo)")
-                toReturn = false
-            }
-        }
-        return toReturn
-    }
-    
-    func updateNote(note: NoteModel, with: NoteModel)->Bool{
-        var toReturn = true
-        
-        
-      
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ENTITY_NOTE)
-            
-            let predicate = NSPredicate(format: "id = %@", with.id as! CVarArg )
-            fetchRequest.predicate = predicate
-//            let firstPredicate = NSPredicate(format: "\(EntityNote.title) = %@", with.title ?? "")
-//            let secondPredicate = NSPredicate(format: "\(EntityNote.description) = %@", with.description )
-//            let thirdPredicate = NSPredicate(format: "\(EntityNote.date) = %@", Utils.getStringFromDate(date: with.dateTime) ?? "")
-//
-//            fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [firstPredicate, secondPredicate, thirdPredicate])
-//
-            do {
-                let result = try context.fetch(fetchRequest)
-                
-                let obj = result[0] as! NSManagedObject
-                obj.setValue(note.title, forKey: EntityNote.title)
-                obj.setValue(note.desc, forKey: EntityNote.description)
-                obj.setValue(note.date, forKey: EntityNote.date)
-                obj.setValue(note.id, forKey: EntityNote.id)
-                
-                try context.save()
-            }catch{
-                print("Update record failded")
-            }
-        
-        
-        return toReturn
-    }
-    
+
     func save()->Bool{
         do{
             try context.save()

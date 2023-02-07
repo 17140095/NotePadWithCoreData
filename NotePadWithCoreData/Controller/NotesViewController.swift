@@ -50,8 +50,6 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        selectNote = nil
-        data = [NoteModel]()
         referesh()
     }
 
@@ -97,10 +95,10 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func referesh(){
-        print("Current count: \(CoreDB.getInstance().getAllNotes().count)")
-        CoreDB.getInstance().context.reset()
         data = viewModel.getNotes()
+        selectNote = nil
         notesTableView.reloadData()
+        notesTableView.separatorInset = UIEdgeInsets.zero
     }
 
 }

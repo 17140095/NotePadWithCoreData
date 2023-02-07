@@ -28,4 +28,30 @@ class NoteViewModel{
         return CoreDB.getInstance().getAllNotes()
     }
     
+    func addNote(title: String, desc: String, date: Date)-> Bool {
+        let newN = NoteModel(entity: CoreDB.getInstance().notesEntity, insertInto: CoreDB.getInstance().context)
+        newN.title = title
+        newN.desc = desc
+        newN.date = date
+        
+        return saveNotes()
+    }
+    
+    func updateNote(note: NoteModel, title: String, desc: String, date: Date)->Bool{
+        note.title = title
+        note.desc = desc
+        note.date = date
+        
+        return saveNotes()
+    }
+    
+    func deleteNote(note: NoteModel){
+        CoreDB.getInstance().context.delete(note)
+    }
+    
+    func saveNotes()-> Bool{
+        return CoreDB.getInstance().save()
+    }
+    
+    
 }
