@@ -33,6 +33,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         notesTableView.keyboardDismissMode = .interactive
         notesTableView.layer.cornerRadius = 10
         notesTableView.clipsToBounds = true
+        notesTableView.separatorInset = UIEdgeInsets.zero
         
         notesTableView.register(NoteWithTitleCell.nib, forCellReuseIdentifier: NoteWithTitleCell.CELL_IDENTIFIER)
         notesTableView.register(NoteWithoutTitleCell.nib, forCellReuseIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER)
@@ -110,19 +111,18 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let note: NoteModel = data[indexPath.row]
     
-        if nil == note.title{
-            let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithoutTitleCell
-            cell?.noteTitle.text = note.description
+        if let nt = note.title, !nt.isBlank(){
+            let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithTitleCell
+            cell?.noteTitle.text = note.title
+            cell?.noteDescription.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
             
             cell?.clipsToBounds = true
             cell?.layer.cornerRadius = 10
             return cell ?? UITableViewCell()
         }else{
-           
-            let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithTitleCell
-            cell?.noteTitle.text = note.title
-            cell?.noteDescription.text = note.desc
+            let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithoutTitleCell
+            cell?.noteTitle.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
             
             cell?.clipsToBounds = true

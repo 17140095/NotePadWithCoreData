@@ -36,8 +36,9 @@ class SingleNoteViewController: UIViewController {
         textView.text = note?.desc
         
         saveButton.tintColor = Constants.themeColor
+        enableSaveButton(false)
         
-        validateShowViews()
+        deleteButton.isHidden = (nil == note)
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -45,7 +46,7 @@ class SingleNoteViewController: UIViewController {
     
         if nil == note {
 
-            if viewModel.addNote(title: titlefield.text ?? "", desc: textView.text ?? "", date: Date()) {
+            if viewModel.addNote(title: titlefield.text?.trim(), desc: textView.text.trim(), date: Date()) {
                 let alert = UIAlertController(title: "Add Note", message: "Successfully saved note.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
                     self.navigationController?.popViewController(animated: true)
@@ -59,7 +60,7 @@ class SingleNoteViewController: UIViewController {
            
         }else{
            
-            if viewModel.updateNote(note: note!, title: titlefield.text ?? "", desc: textView.text ?? "", date: Date()) {
+            if viewModel.updateNote(note: note!, title: titlefield.text?.trim(), desc: textView.text.trim(), date: Date()) {
                 let alert = UIAlertController(title: "Update Note", message: "Successfully update note.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
                     self.navigationController?.popViewController(animated: true)
@@ -114,8 +115,39 @@ extension SingleNoteViewController: UITextViewDelegate, UITextFieldDelegate{
     }
     
     func validateShowViews(){
-        saveButton.isHidden = (titlefield.text?.isEmpty ?? true && textView.text.isEmpty) ? true: false
+        
+        if nil == note{
+            let shouldEnable = (titlefield.text?.isBlank() ?? true && textView.text.isBlank()) ? true: false
+            enableSaveButton(!shouldEnable)
+            
+        }else{
+            print("Edit show save call")
+            enableSaveButton(true)
+        }
+        
+        
+    }
+    
+    func enableSaveButton(_ isEnable: Bool){
+        if isEnable{
+            saveButton.isEnabled = true
+            saveButton.customView?.isUserInteractionEnabled = true
+            saveButton.customView?.alpha = 1
+        }else{
+            saveButton.isEnabled = false
+            saveButton.customView?.isUserInteractionEnabled = false
+            saveButton.customView?.alpha = 0.66
+        }
     }
 }
 
 
+extension String{
+   
+    func isBlank()-> Bool{
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    func trim()-> String{
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
