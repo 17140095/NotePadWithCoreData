@@ -25,6 +25,7 @@ class TodosViewController: UIViewController {
         
         todosTableView.delegate = self
         todosTableView.dataSource = self
+        todosTableView.cornerRadius(radius: 10)
         todosTableView.register(TodoCell.nib, forCellReuseIdentifier: TodoCell.CELL_IDENTIFIER)
         
         addButton.tintColor = Constants.themeColor
@@ -33,6 +34,11 @@ class TodosViewController: UIViewController {
         
         referesh()
     }
+    
+    override func viewDidLayoutSubviews() {
+        todosTableView.separatorStyle = .none
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         referesh()
@@ -83,7 +89,8 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
         return cell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        cell.addSubview(CustomeKit.getTableViewSeparator(cell: cell))
+        cell.cornerRadius(radius: 10)
     }
 }
 

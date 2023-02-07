@@ -120,14 +120,12 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.noteTitle.text = note.title
             cell?.noteDescription.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
-            cell?.cornerRadius(radius: 10)
             
             return cell ?? UITableViewCell()
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithoutTitleCell
             cell?.noteTitle.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
-            cell?.cornerRadius(radius: 10)
             
             return cell ?? UITableViewCell()
         }
@@ -135,16 +133,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let thickness: CGFloat = 10.0
-        let seprator = UIView(frame: CGRect(x: 0,
-                                            y: cell.frame.height-thickness,
-                                            width: cell.frame.width,
-                                            height: thickness)
-        )
-        seprator.backgroundColor = UIColor.systemGray6
-        seprator.clipsToBounds = true
-        seprator.layer.cornerRadius = 10
-        cell.addSubview(seprator)
+        cell.cornerRadius(radius: 10)
+        cell.addSubview(CustomeKit.getTableViewSeparator(cell: cell))
       
         
     }

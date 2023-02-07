@@ -53,7 +53,7 @@ class SingleNoteViewController: UIViewController {
                 })
                 present(alert, animated: true)
             }else{
-                let alert = Custome.getAlert(title: "Error", message: "Note dose not saved. There some error.")
+                let alert = CustomeKit.getAlert(title: "Error", message: "Note dose not saved. There some error.")
                 present(alert, animated: true)
             }
             
@@ -68,7 +68,7 @@ class SingleNoteViewController: UIViewController {
                 alert.view.tintColor = Constants.themeColor
                 present(alert, animated: true)
             }else{
-                let alert = Custome.getAlert(title: "Error", message: "Note dose not update. There some error.")
+                let alert = CustomeKit.getAlert(title: "Error", message: "Note dose not update. There some error.")
                 present(alert, animated: true)
             }
         }

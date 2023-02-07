@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD26FA0C298B9B520084367D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA0B298B9B520084367D /* Constants.swift */; };
 		DD26FA0E298CE76B0084367D /* CoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA0D298CE76B0084367D /* CoreDB.swift */; };
-		DD26FA10298D1B8B0084367D /* CustomeAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA0F298D1B8B0084367D /* CustomeAlert.swift */; };
+		DD26FA10298D1B8B0084367D /* CustomeKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA0F298D1B8B0084367D /* CustomeKit.swift */; };
 		DD26FA1A2990E47B0084367D /* NotePadModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA182990E47B0084367D /* NotePadModel.xcdatamodeld */; };
 		DD26FA1D2990E4E40084367D /* NoteModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA1B2990E4E40084367D /* NoteModel+CoreDataClass.swift */; };
 		DD26FA1E2990E4E40084367D /* NoteModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD26FA1C2990E4E40084367D /* NoteModel+CoreDataProperties.swift */; };
@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		DD26FA0B298B9B520084367D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DD26FA0D298CE76B0084367D /* CoreDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDB.swift; sourceTree = "<group>"; };
-		DD26FA0F298D1B8B0084367D /* CustomeAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeAlert.swift; sourceTree = "<group>"; };
+		DD26FA0F298D1B8B0084367D /* CustomeKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeKit.swift; sourceTree = "<group>"; };
 		DD26FA192990E47B0084367D /* NotePadModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotePadModel.xcdatamodel; sourceTree = "<group>"; };
 		DD26FA1B2990E4E40084367D /* NoteModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		DD26FA1C2990E4E40084367D /* NoteModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoteModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 				DD5C191729890BA60063C0D1 /* Utils.swift */,
 				DD26FA0B298B9B520084367D /* Constants.swift */,
 				DD26FA0D298CE76B0084367D /* CoreDB.swift */,
-				DD26FA0F298D1B8B0084367D /* CustomeAlert.swift */,
+				DD26FA0F298D1B8B0084367D /* CustomeKit.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 				DD26FA1E2990E4E40084367D /* NoteModel+CoreDataProperties.swift in Sources */,
 				DD5C1915298909E50063C0D1 /* NoteWithTitleCell.swift in Sources */,
 				DD2A9C352987D0A600032355 /* NoteViewModel.swift in Sources */,
-				DD26FA10298D1B8B0084367D /* CustomeAlert.swift in Sources */,
+				DD26FA10298D1B8B0084367D /* CustomeKit.swift in Sources */,
 				DD26FA1A2990E47B0084367D /* NotePadModel.xcdatamodeld in Sources */,
 				DD26FA0C298B9B520084367D /* Constants.swift in Sources */,
 				DD3892A32982B53100F9849D /* ViewController.swift in Sources */,
