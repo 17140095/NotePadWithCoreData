@@ -45,7 +45,11 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         referesh()
         
     }
-    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        notesTableView.separatorStyle = .none
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         referesh()
@@ -80,7 +84,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
             self.data  = data
             
         }else{
-            self.data = viewModel.notes
+            self.data = viewModel.getNotes()
         }
         handleBackgroundTableView()
     }
@@ -88,6 +92,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     private func referesh(){
         data = viewModel.getNotes()
         selectNote = nil
+        search.text = ""
         handleBackgroundTableView()
     }
     private func handleBackgroundTableView(){
