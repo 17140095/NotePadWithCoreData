@@ -31,21 +31,18 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         notesTableView.backgroundColor = UIColor.clear
         notesTableView.keyboardDismissMode = .onDrag
         notesTableView.keyboardDismissMode = .interactive
-        notesTableView.layer.cornerRadius = 10
-        notesTableView.clipsToBounds = true
-        notesTableView.separatorInset = UIEdgeInsets.zero
+        notesTableView.cornerRadius(radius: 10)
         
         notesTableView.register(NoteWithTitleCell.nib, forCellReuseIdentifier: NoteWithTitleCell.CELL_IDENTIFIER)
         notesTableView.register(NoteWithoutTitleCell.nib, forCellReuseIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER)
         
-        search.layer.cornerRadius = search.frame.height/2
+        search.cornerRadius(radius: search.frame.height/2)
       
-        search.clipsToBounds = true
         search.delegate = self
         
         data = viewModel.notes
         
-        
+        referesh()
         
     }
     
@@ -81,25 +78,27 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         if let key = search.text, !key.isEmpty{
             print("Filter note check")
             self.data  = data
-            if data.count<=0 {
-                notesTableView.setBackgroundMessage(message: "No note found")
-                print("Set background")
-            }else{
-                notesTableView.clearBackgroundMessage()
-            }
+            
         }else{
             self.data = viewModel.notes
-            notesTableView.clearBackgroundMessage()
         }
-        
-        self.notesTableView.reloadData()
+        handleBackgroundTableView()
     }
 
     private func referesh(){
         data = viewModel.getNotes()
         selectNote = nil
-        notesTableView.reloadData()
+        handleBackgroundTableView()
+    }
+    private func handleBackgroundTableView(){
+        if data.count<=0 {
+            notesTableView.setBackgroundMessage(message: "No note found")
+            print("Set background")
+        }else{
+            notesTableView.clearBackgroundMessage()
+        }
         notesTableView.separatorInset = UIEdgeInsets.zero
+        notesTableView.reloadData()
     }
 
 }
@@ -116,17 +115,15 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.noteTitle.text = note.title
             cell?.noteDescription.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
+            cell?.cornerRadius(radius: 10)
             
-            cell?.clipsToBounds = true
-            cell?.layer.cornerRadius = 10
             return cell ?? UITableViewCell()
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER, for: indexPath) as? NoteWithoutTitleCell
             cell?.noteTitle.text = note.desc
             cell?.noteDateTime.text = Utils.getStringFromDate(date: note.date ?? Date())
+            cell?.cornerRadius(radius: 10)
             
-            cell?.clipsToBounds = true
-            cell?.layer.cornerRadius = 10
             return cell ?? UITableViewCell()
         }
     }
@@ -199,5 +196,12 @@ extension UIColor {
             (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
+extension UIView{
+    func cornerRadius(radius: CGFloat){
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
     }
 }

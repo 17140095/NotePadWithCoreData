@@ -95,10 +95,12 @@ class SingleNoteViewController: UIViewController {
     
     private func deleteNote(){
         
-        if let note = self.note {
-            viewModel.deleteNote(note: note)
+        if let note = self.note, viewModel.deleteNote(note: note) {
+            
             print("Note deleted")
             self.navigationController?.popViewController(animated: true)
+        }else{
+            print("No note deleted!")
         }
     }
 

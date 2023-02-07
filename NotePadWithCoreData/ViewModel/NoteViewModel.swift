@@ -45,8 +45,9 @@ class NoteViewModel{
         return saveNotes()
     }
     
-    func deleteNote(note: NoteModel){
+    func deleteNote(note: NoteModel)-> Bool{
         CoreDB.getInstance().context.delete(note)
+        return saveNotes()
     }
     
     func saveNotes()-> Bool{
