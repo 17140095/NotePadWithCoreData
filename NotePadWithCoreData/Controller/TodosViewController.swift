@@ -29,7 +29,8 @@ class TodosViewController: UIViewController {
         todosTableView.dataSource = self
         todosTableView.cornerRadius(radius: 10)
         todosTableView.register(TodoCell.nib, forCellReuseIdentifier: TodoCell.CELL_IDENTIFIER)
-        
+        todosTableView.sectionHeaderTopPadding = 0
+                
         addButton.tintColor = Constants.themeColor
         
         search.delegate = self
@@ -69,38 +70,35 @@ class TodosViewController: UIViewController {
 
 extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1, dataCompleted.count>0{
-            return "Completed"
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+       
+        if section == 1{
+            let header = UIView()
+            let label = UILabel()
+            label.frame.size.width = tableView.bounds.width
+            label.frame.size.height = 40
+            label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+            
+            label.text = "Completed"
+            label.sizeToFit()
+            label.textAlignment = .left
+            label.backgroundColor = .systemGray6
+            label.textColor = Constants.themeColor
+
+            header.addSubview(label)
+            header.clipsToBounds = true
+            return header
         }
         return nil
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        if section == 1{
-//            let header = UIView()
-//            let label = UILabel()
-//            label.frame.size.width = tableView.bounds.width
-//            label.frame.size.height = 30
-//            
-//            label.text = "Completed"
-//            label.sizeToFit()
-//            label.textAlignment = .left
-//            label.backgroundColor = .systemGray6
-//            
-//            header.addSubview(label)
-//            header.clipsToBounds = true
-//            return header
-//        }
-//        return nil
-//    }
-    
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        let header = view as? UITableViewHeaderFooterView
-//        header?.textLabel?.textAlignment = .left
-//        header?.textLabel?.backgroundColor = .cyan
-//    }
-   
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0{
+            return 0.0
+        }
+        return 30.0
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         section == 0 ? dataUnCompleted.count : dataCompleted.count

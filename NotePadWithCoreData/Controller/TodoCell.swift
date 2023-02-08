@@ -19,15 +19,9 @@ class TodoCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-//        if let t = selectedTodo{
-//            t.display()
-//        }else{
-//            print("Todo is nil for cell")
-//        }
-//        todoTask.text = selectedTodo?.task
-//        
-    
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
         checkImage.image = UIImage(systemName: imageName)
     }
 
