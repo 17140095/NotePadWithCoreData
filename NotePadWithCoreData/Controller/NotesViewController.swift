@@ -45,11 +45,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         referesh()
         
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        notesTableView.separatorStyle = .none
-    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         referesh()
@@ -69,18 +65,13 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-       // print("Search happing.....")
-        print("All count: \(viewModel.notes.count)")
         let data = viewModel.notes.filter { note in
-            print("Title: \(note.title)\tDescription: \(note.desc)\t searchKey: \(search.text)\n")
             if let key = search.text, (note.title?.containsIgnoreCase(key) ?? false || note.desc?.containsIgnoreCase(key) ?? false){
                 return true
             }
              return false
         }
-        print("filter count: \(data.count)")
         if let key = search.text, !key.isEmpty{
-            print("Filter note check")
             self.data  = data
             
         }else{
@@ -102,7 +93,6 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         }else{
             notesTableView.clearBackgroundMessage()
         }
-        notesTableView.separatorInset = UIEdgeInsets.zero
         notesTableView.reloadData()
     }
 
@@ -142,7 +132,6 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let indexPathOfRow = notesTableView.indexPathForSelectedRow {
             selectNote = data[indexPathOfRow.row]
-            print("Selected Row")
             selectNote?.display()
             
             performSegue(withIdentifier: "SingleNoteViewController", sender: self)
@@ -164,6 +153,7 @@ extension UITableView{
         label.textAlignment = .center
         label.text = message
         
+        self.separatorStyle = .none
         self.backgroundView = label
         self.backgroundColor = .white
     }
@@ -171,6 +161,7 @@ extension UITableView{
         self.backgroundView = nil
         self.separatorStyle = .singleLine
         self.backgroundColor = .systemGray6
+        self.separatorStyle = .none
     }
 }
 

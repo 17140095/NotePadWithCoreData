@@ -30,13 +30,10 @@ class TodosViewController: UIViewController {
         
         addButton.tintColor = Constants.themeColor
         
+        search.delegate = self
         search.cornerRadius(radius: search.frame.height/2)
         
         referesh()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        todosTableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +47,6 @@ class TodosViewController: UIViewController {
     
     func referesh(){
         data = viewModel.getTodos()
-        print("todo count: \(data.count)")
         search.text = ""
         handleBackgroundTableView()
     }
@@ -62,7 +58,6 @@ class TodosViewController: UIViewController {
         }else{
             todosTableView.clearBackgroundMessage()
         }
-        todosTableView.separatorInset = UIEdgeInsets.zero
         todosTableView.reloadData()
     }
 }
@@ -71,17 +66,14 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.getTodos().count
+        data.count
     }
 //    func numberOfSections(in tableView: UITableView) -> Int {
 //        viewModel.getCompletedTodo().count>0 ? 2: 1
 //    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+   
         let todo = data[indexPath.row]
-        
-        print("For cell todo")
-        todo.display()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.CELL_IDENTIFIER, for: indexPath) as? TodoCell
         cell?.todoTask.text = todo.task
@@ -95,5 +87,19 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension TodosViewController: UITextFieldDelegate{
-    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let filterData = viewModel.getTodos().filter { todo in
+            if let key = search.text, let task = todo.task, !key.isBlank(), task.containsIgnoreCase(key) {
+                return true
+            }
+            return false
+        }
+        
+        if !(search.text?.isBlank() ?? true) {
+            data = filterData
+        }else{
+            data = viewModel.getTodos()
+        }
+        handleBackgroundTableView()
+    }
 }
