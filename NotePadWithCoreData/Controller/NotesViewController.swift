@@ -89,6 +89,7 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     private func handleBackgroundTableView(){
         if data.count<=0 {
             notesTableView.setBackgroundMessage(message: "No note found")
+            print("Set background")
         }else{
             notesTableView.clearBackgroundMessage()
         }
@@ -148,13 +149,13 @@ extension String {
 extension UITableView{
     func setBackgroundMessage(message: String){
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
-        label.textColor = .black
+        label.textColor = Constants.themeColor
         label.textAlignment = .center
         label.text = message
         
         self.separatorStyle = .none
         self.backgroundView = label
-        self.backgroundColor = .white
+        self.backgroundColor = .systemBackground
     }
     func clearBackgroundMessage(){
         self.backgroundView = nil
