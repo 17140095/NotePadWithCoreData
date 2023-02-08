@@ -8,9 +8,8 @@
 import Foundation
 
 class TodoViewModel{
-    private var todos:[Todo]
-    
-    init(){
+  
+    func getTodos()-> [Todo] {
         let todo1 = Todo(entity: CoreDB.getInstance().todosEntity, insertInto: CoreDB.getInstance().context)
         todo1.task = "Get a ride of card"
         
@@ -25,19 +24,14 @@ class TodoViewModel{
         todos.append(todo1)
         todos.append(todo2)
         todos.append(todo3)
-        
-        self.todos = todos
-    }
-    func getTodos()-> [Todo] {
-        
         return todos
     }
-    func getCompletedTodo()-> [Todo]{
+    func getCompletedTodo(todos: [Todo])-> [Todo]{
         todos.filter { todo in
             todo.isDone
         }
     }
-    func getUncompletedTodo()->[Todo]{
+    func getUncompletedTodo(todos: [Todo])->[Todo]{
         todos.filter { todo in
             !todo.isDone
         }

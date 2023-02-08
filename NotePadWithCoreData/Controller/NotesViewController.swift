@@ -89,7 +89,6 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
     private func handleBackgroundTableView(){
         if data.count<=0 {
             notesTableView.setBackgroundMessage(message: "No note found")
-            print("Set background")
         }else{
             notesTableView.clearBackgroundMessage()
         }

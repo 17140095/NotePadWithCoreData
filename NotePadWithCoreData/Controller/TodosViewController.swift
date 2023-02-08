@@ -16,6 +16,8 @@ class TodosViewController: UIViewController {
     let viewModel = TodoViewModel()
     
     var data: [Todo] = [Todo]()
+    var dataCompleted: [Todo] = [Todo]()
+    var dataUnCompleted: [Todo] = [Todo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,10 @@ class TodosViewController: UIViewController {
     
     func referesh(){
         data = viewModel.getTodos()
+        dataCompleted = viewModel.getCompletedTodo(todos: data)
+        dataUnCompleted = viewModel.getUncompletedTodo(todos: data)
+        
+        print("CompletedCount: \(dataCompleted.count), Uncompleted: \(dataUnCompleted.count)")
         search.text = ""
         handleBackgroundTableView()
     }
@@ -54,7 +60,6 @@ class TodosViewController: UIViewController {
     private func handleBackgroundTableView(){
         if data.count<=0 {
             todosTableView.setBackgroundMessage(message: "No todo found")
-            print("Set todo background")
         }else{
             todosTableView.clearBackgroundMessage()
         }
@@ -64,19 +69,65 @@ class TodosViewController: UIViewController {
 
 extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
 
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1, dataCompleted.count>0{
+            return "Completed"
+        }
+        return nil
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 1{
+//            let header = UIView()
+//            let label = UILabel()
+//            label.frame.size.width = tableView.bounds.width
+//            label.frame.size.height = 30
+//            
+//            label.text = "Completed"
+//            label.sizeToFit()
+//            label.textAlignment = .left
+//            label.backgroundColor = .systemGray6
+//            
+//            header.addSubview(label)
+//            header.clipsToBounds = true
+//            return header
+//        }
+//        return nil
+//    }
+    
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        let header = view as? UITableViewHeaderFooterView
+//        header?.textLabel?.textAlignment = .left
+//        header?.textLabel?.backgroundColor = .cyan
+//    }
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        section == 0 ? dataUnCompleted.count : dataCompleted.count
     }
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        viewModel.getCompletedTodo().count>0 ? 2: 1
-//    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        dataCompleted.count>0 ? 2: 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    
-        let todo = data[indexPath.row]
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.CELL_IDENTIFIER, for: indexPath) as? TodoCell
-        cell?.todoTask.text = todo.task
+        
+        print("Section no: \(indexPath.section)")
+        
+        if indexPath.section == 0{
+            let todo = dataUnCompleted[indexPath.row]
+            cell?.todoTask.attributedText = nil
+            cell?.todoTask.text = todo.task
+            cell?.imageName = TodoCellCheckImage.uncheck
+        }else{
+            let todo = dataCompleted[indexPath.row]
+            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: todo.task ?? "")
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
+            cell?.todoTask.attributedText = attributeString
+            cell?.imageName = TodoCellCheckImage.check
+        }
         
         return cell ?? UITableViewCell()
     }
@@ -97,9 +148,12 @@ extension TodosViewController: UITextFieldDelegate{
         
         if !(search.text?.isBlank() ?? true) {
             data = filterData
+            
         }else{
             data = viewModel.getTodos()
         }
+        dataCompleted = viewModel.getCompletedTodo(todos: data)
+        dataUnCompleted = viewModel.getUncompletedTodo(todos: data)
         handleBackgroundTableView()
     }
 }
