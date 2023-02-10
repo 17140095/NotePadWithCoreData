@@ -26,6 +26,7 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search todos..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qLM-dC-nFH">
                                 <rect key="frame" x="10" y="141.66666666666666" width="373" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="searchTodo"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go"/>
                             </textField>
@@ -60,9 +61,17 @@
                             <constraint firstItem="24N-TS-Rin" firstAttribute="trailing" secondItem="qLM-dC-nFH" secondAttribute="trailing" id="yaf-A6-qB5"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1jQ-1f-KAk"/>
+                    <navigationItem key="navigationItem" id="1jQ-1f-KAk">
+                        <barButtonItem key="rightBarButtonItem" title="delete" image="trash.fill" catalog="system" id="GMW-hy-OCl">
+                            <color key="tintColor" red="0.23921568630000001" green="0.69803921570000005" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteTodoAction:" destination="jCB-YF-Y9W" id="P2H-Fd-5we"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="5NL-rR-51p" id="W6Y-C7-FJ7"/>
+                        <outlet property="deleteButton" destination="GMW-hy-OCl" id="XKP-nY-UcA"/>
                         <outlet property="search" destination="qLM-dC-nFH" id="dJ7-Y4-x8U"/>
                         <outlet property="todosTableView" destination="24N-TS-Rin" id="8Wb-ct-nK4"/>
                     </connections>
@@ -343,6 +352,7 @@
         <image name="note.text" catalog="system" width="128" height="107"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="trash" catalog="system" width="117" height="128"/>
+        <image name="trash.fill" catalog="system" width="119" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

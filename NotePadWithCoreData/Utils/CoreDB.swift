@@ -26,6 +26,7 @@ class CoreDB{
         self.notesEntity = NSEntityDescription.entity(forEntityName: ENTITY_NOTE, in: context)!
         self.todosEntity = NSEntityDescription.entity(forEntityName: ENTITY_TODO, in: context)!
         //deleteAllNotes()
+        //deleteAllTodos()
     }
     
     static func getInstance()-> CoreDB {
@@ -43,7 +44,21 @@ class CoreDB{
 
             try context.save()
         }catch {
-            print("Could not delete all")
+            print("Could not delete all notes")
+        }
+    }
+    func deleteAllTodos(){
+    
+        let fetchRequest = Todo.fetchRequest()
+        do{
+            let result = try context.fetch(fetchRequest)
+            for r in result {
+                context.delete(r)
+            }
+
+            try context.save()
+        }catch {
+            print("Could not delete all Todos")
         }
     }
     
@@ -61,6 +76,7 @@ class CoreDB{
         
         return temp
     }
+    
     func getAllTodos()-> [Todo]{
         print("Real all todos")
         var temp = [Todo]()

@@ -12,12 +12,16 @@ class TodosViewController: UIViewController {
     @IBOutlet weak var todosTableView: UITableView!
     @IBOutlet weak var search: UITextField!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     let viewModel = TodoViewModel()
     
     var data: [Todo] = [Todo]()
     var dataCompleted: [Todo] = [Todo]()
     var dataUnCompleted: [Todo] = [Todo]()
+    var selectedTodo: Todo?
+    
+    var addAlertAction: UIAlertAction?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,8 @@ class TodosViewController: UIViewController {
         search.delegate = self
         search.cornerRadius(radius: search.frame.height/2)
         
+        todosTableView.estimatedRowHeight = 200
+        
         referesh()
     }
     
@@ -45,9 +51,45 @@ class TodosViewController: UIViewController {
     }
     
     @IBAction func addTodoAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Add Todo", message: nil, preferredStyle: .alert)
+        alert.view.tintColor = Constants.themeColor
+        alert.addTextField()
+        alert.textFields?[0].placeholder = "Write task"
+        alert.textFields?[0].accessibilityIdentifier = "addTodo"
+        alert.textFields?[0].delegate = self
         
+        
+        addAlertAction = UIAlertAction(title: "Save", style: .default){_ in
+            let task = alert.textFields?[0].text?.trim()
+            if let t = task, !t.isEmpty{
+                if self.viewModel.addTodo(task: t){
+                   
+                    print("Todo save")
+                    self.referesh()
+                }else{
+                    print("Todo not save")
+                }
+                
+            }else{
+                
+                print("Alert task: \(task)")
+            }
+        }
+        addAlertAction?.isEnabled = false
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alert.addAction(addAlertAction!)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true)
     }
     
+    @IBAction func deleteTodoAction(_ sender: Any) {
+        if let st = self.selectedTodo{
+            viewModel.deleteTodo(todo: st)
+            referesh()
+        }
+    }
     func referesh(){
         data = viewModel.getTodos()
         dataCompleted = viewModel.getCompletedTodo(todos: data)
@@ -55,6 +97,9 @@ class TodosViewController: UIViewController {
         
         print("CompletedCount: \(dataCompleted.count), Uncompleted: \(dataUnCompleted.count)")
         search.text = ""
+        selectedTodo = nil
+        addAlertAction?.isEnabled = false
+        enableDeleteButton(shouldEnable: false)
         handleBackgroundTableView()
     }
 
@@ -133,25 +178,58 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
         cell.addSubview(CustomeKit.getTableViewSeparator(cell: cell))
         cell.cornerRadius(radius: 10)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        selectedTodo = indexPath.section == 0 ? dataUnCompleted[indexPath.row] : dataUnCompleted[indexPath.row]
+       enableDeleteButton(shouldEnable: true)
+    }
+    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        200
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
 }
 
 extension TodosViewController: UITextFieldDelegate{
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        let filterData = viewModel.getTodos().filter { todo in
-            if let key = search.text, let task = todo.task, !key.isBlank(), task.containsIgnoreCase(key) {
-                return true
-            }
-            return false
-        }
         
-        if !(search.text?.isBlank() ?? true) {
-            data = filterData
+        if textField.accessibilityIdentifier?.trim() == "searchTodo" {
             
+            let filterData = viewModel.getTodos().filter { todo in
+                if let key = search.text, let task = todo.task, !key.isBlank(), task.containsIgnoreCase(key) {
+                    return true
+                }
+                return false
+            }
+            
+            if !(search.text?.isBlank() ?? true) {
+                data = filterData
+                
+            }else{
+                data = viewModel.getTodos()
+            }
+            dataCompleted = viewModel.getCompletedTodo(todos: data)
+            dataUnCompleted = viewModel.getUncompletedTodo(todos: data)
+            handleBackgroundTableView()
+        }else if textField.accessibilityIdentifier?.trim() == "addTodo" {
+            addAlertAction?.isEnabled = !(textField.text?.isBlank() ?? true)
+            print("Todo textfield")
         }else{
-            data = viewModel.getTodos()
+            print("No text field identifier matched")
         }
-        dataCompleted = viewModel.getCompletedTodo(todos: data)
-        dataUnCompleted = viewModel.getUncompletedTodo(todos: data)
-        handleBackgroundTableView()
+    }
+    
+    private func enableDeleteButton(shouldEnable: Bool) {
+        if shouldEnable {
+            deleteButton.isEnabled = true
+            deleteButton.customView?.alpha = 1
+        }else{
+            deleteButton.isEnabled = false
+            deleteButton.customView?.alpha = 0.66
+        }
     }
 }

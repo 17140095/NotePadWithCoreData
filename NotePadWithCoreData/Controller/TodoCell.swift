@@ -13,7 +13,8 @@ class TodoCell: UITableViewCell {
     
     var imageName = TodoCellCheckImage.uncheck
     
-    //var selectedTodo: Todo?
+    var selectedTodo: Todo?
+    
     static let CELL_IDENTIFIER = "TodoCell"
     static let nib = UINib(nibName: CELL_IDENTIFIER, bundle: Bundle.main)
     
@@ -23,12 +24,21 @@ class TodoCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         checkImage.image = UIImage(systemName: imageName)
+        checkImage.isUserInteractionEnabled = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.onCheckImageTap(_:)))
+        checkImage.addGestureRecognizer(tap)
+        //print("Cell selected")
+    }
+    
+    @objc
+    func onCheckImageTap(_ tapRecognizer: UITapGestureRecognizer?){
+        print("Check image tapped")
     }
     
 }
