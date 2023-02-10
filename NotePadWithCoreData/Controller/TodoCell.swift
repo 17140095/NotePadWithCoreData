@@ -11,9 +11,11 @@ class TodoCell: UITableViewCell {
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var todoTask: UILabel!
     
-    var imageName = TodoCellCheckImage.uncheck
+//    var imageName = TodoCellCheckImage.uncheck
     
     var selectedTodo: Todo?
+    //var tableview: UITableView?
+    var referesh: (()->Void)?
     
     static let CELL_IDENTIFIER = "TodoCell"
     static let nib = UINib(nibName: CELL_IDENTIFIER, bundle: Bundle.main)
@@ -23,7 +25,24 @@ class TodoCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        checkImage.image = UIImage(systemName: imageName)
+        
+        if let currTodo = selectedTodo{
+            
+            checkImage.image = UIImage(systemName: currTodo.isDone ? TodoCellCheckImage.check: TodoCellCheckImage.uncheck )
+            
+            if currTodo.isDone{
+                todoTask.attributedText = currTodo.task?.getStrikeString()
+            }else{
+                todoTask.attributedText = nil
+                todoTask.text = currTodo.task
+            }
+            
+
+        }else{
+            todoTask.text = selectedTodo?.task
+            checkImage.image = UIImage(systemName: TodoCellCheckImage.uncheck)
+            
+        }
         checkImage.isUserInteractionEnabled = true
     }
 
@@ -39,6 +58,14 @@ class TodoCell: UITableViewCell {
     @objc
     func onCheckImageTap(_ tapRecognizer: UITapGestureRecognizer?){
         print("Check image tapped")
+        
+        if selectedTodo?.isDone ?? true {
+          print("Already done")
+        }else{
+            selectedTodo?.isDone = true
+            self.referesh?()
+            //tableview?.reloadData()
+        }
     }
     
 }

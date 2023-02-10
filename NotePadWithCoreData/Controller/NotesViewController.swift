@@ -144,6 +144,14 @@ extension String {
     func containsIgnoreCase(_ string: String) -> Bool {
         return self.lowercased().contains(string.lowercased())
     }
+    
+    func getStrikeString()-> NSMutableAttributedString{
+        
+        let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
+        
+        return attributeString
+    }
 }
 
 extension UITableView{

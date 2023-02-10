@@ -161,17 +161,19 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
         
         if indexPath.section == 0{
             let todo = dataUnCompleted[indexPath.row]
-            cell?.todoTask.attributedText = nil
-            cell?.todoTask.text = todo.task
-            cell?.imageName = TodoCellCheckImage.uncheck
+            cell?.selectedTodo = todo
+//            cell?.todoTask.attributedText = nil
+//            cell?.todoTask.text = todo.task
+//            cell?.imageName = TodoCellCheckImage.uncheck
         }else{
             let todo = dataCompleted[indexPath.row]
-            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: todo.task ?? "")
-                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
-            cell?.todoTask.attributedText = attributeString
-            cell?.imageName = TodoCellCheckImage.check
+            cell?.selectedTodo = todo
+//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: todo.task ?? "")
+//                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
+//            cell?.todoTask.attributedText = attributeString
+//            cell?.imageName = TodoCellCheckImage.check
         }
-        
+        cell?.referesh = referesh
         return cell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -181,7 +183,7 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        selectedTodo = indexPath.section == 0 ? dataUnCompleted[indexPath.row] : dataUnCompleted[indexPath.row]
+        selectedTodo = indexPath.section == 0 ? dataUnCompleted[indexPath.row] : dataCompleted[indexPath.row]
        enableDeleteButton(shouldEnable: true)
     }
     
