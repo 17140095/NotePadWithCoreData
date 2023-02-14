@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -46,15 +47,40 @@
                             </view>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mjz-Gk-oJq">
+                        <rect key="frame" x="0.0" y="87" width="343" height="10"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="teS-ei-pTW"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Bs1-L0-8vF" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" constant="-20" id="SfV-pr-B87"/>
+                    <constraint firstAttribute="trailing" secondItem="Mjz-Gk-oJq" secondAttribute="trailing" id="Ahl-hy-88U"/>
                     <constraint firstItem="Bs1-L0-8vF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="TCQ-zO-sc3"/>
+                    <constraint firstAttribute="bottom" secondItem="Mjz-Gk-oJq" secondAttribute="bottom" id="Yk9-68-oSS"/>
+                    <constraint firstItem="Mjz-Gk-oJq" firstAttribute="top" secondItem="Bs1-L0-8vF" secondAttribute="bottom" constant="10" id="jMk-pd-j6O"/>
+                    <constraint firstItem="Mjz-Gk-oJq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nCM-Ra-dQp"/>
                     <constraint firstAttribute="trailing" secondItem="Bs1-L0-8vF" secondAttribute="trailing" constant="10" id="niI-ag-KgW"/>
                     <constraint firstItem="Bs1-L0-8vF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="pgO-pV-S15"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="10"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="checkImage" destination="YeY-uj-xBl" id="0Sx-Oy-Gme"/>
                 <outlet property="todoTask" destination="jC5-i0-b5e" id="lE2-aq-o4f"/>
@@ -64,5 +90,8 @@
     </objects>
     <resources>
         <image name="circlebadge" catalog="system" width="128" height="122"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

@@ -31,12 +31,12 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         notesTableView.backgroundColor = UIColor.clear
         notesTableView.keyboardDismissMode = .onDrag
         notesTableView.keyboardDismissMode = .interactive
-        notesTableView.cornerRadius(radius: 10)
+        notesTableView.cornerRadius = 10 //(radius: 10)
         
         notesTableView.register(NoteWithTitleCell.nib, forCellReuseIdentifier: NoteWithTitleCell.CELL_IDENTIFIER)
         notesTableView.register(NoteWithoutTitleCell.nib, forCellReuseIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER)
         
-        search.cornerRadius(radius: search.frame.height/2)
+        search.cornerRadius = 10 //(radius: search.frame.height/2)
       
         search.delegate = self
         
@@ -123,8 +123,8 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        cell.cornerRadius(radius: 10)
-        cell.addSubview(CustomeKit.getTableViewSeparator(cell: cell))
+        cell.cornerRadius = 10 //(radius: 10)
+        //cell.addSeparatorView()
       
         
     }
@@ -194,8 +194,15 @@ extension UIColor {
 }
 
 extension UIView{
-    func cornerRadius(radius: CGFloat){
-        self.layer.cornerRadius = radius
-        self.clipsToBounds = true
+    @IBInspectable
+    public var cornerRadius: CGFloat {
+        set (radius) {
+            self.layer.cornerRadius = radius
+            self.layer.masksToBounds = radius > 0
+            self.clipsToBounds = radius > 0
+        }
+        get {
+            return self.layer.cornerRadius
+        }
     }
 }

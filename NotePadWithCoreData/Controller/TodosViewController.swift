@@ -31,14 +31,14 @@ class TodosViewController: UIViewController {
         
         todosTableView.delegate = self
         todosTableView.dataSource = self
-        todosTableView.cornerRadius(radius: 10)
+        todosTableView.cornerRadius = 10 //(radius: 10)
         todosTableView.register(TodoCell.nib, forCellReuseIdentifier: TodoCell.CELL_IDENTIFIER)
         todosTableView.sectionHeaderTopPadding = 0
                 
         addButton.tintColor = Constants.themeColor
         
         search.delegate = self
-        search.cornerRadius(radius: search.frame.height/2)
+        search.cornerRadius = 10 //(radius: search.frame.height/2)
         
         todosTableView.estimatedRowHeight = 200
         
@@ -86,8 +86,15 @@ class TodosViewController: UIViewController {
     
     @IBAction func deleteTodoAction(_ sender: Any) {
         if let st = self.selectedTodo{
-            viewModel.deleteTodo(todo: st)
-            referesh()
+            if viewModel.deleteTodo(todo: st){
+                referesh()
+                let alert = CustomeKit.getAlert(title: "Success", message: "Successfully delete todo.")
+                //alert.addAction(UIAlertAction(title: "Ok", style: <#T##UIAlertAction.Style#>))
+                self.present(alert, animated: true)
+            }else{
+                let alert = CustomeKit.getAlert(title: "Error", message: "There some error to delete todo")
+                self.present(alert, animated: true)
+            }
         }
     }
     func referesh(){
@@ -126,11 +133,11 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
             label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
             
             label.text = "Completed"
-            label.sizeToFit()
             label.textAlignment = .left
             label.backgroundColor = .systemGray6
             label.textColor = Constants.themeColor
-
+            label.sizeToFit()
+            
             header.addSubview(label)
             header.clipsToBounds = true
             return header
@@ -155,30 +162,22 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
    
-        let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.CELL_IDENTIFIER, for: indexPath) as? TodoCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.CELL_IDENTIFIER) as? TodoCell
         
         print("Section no: \(indexPath.section)")
         
         if indexPath.section == 0{
             let todo = dataUnCompleted[indexPath.row]
             cell?.selectedTodo = todo
-//            cell?.todoTask.attributedText = nil
-//            cell?.todoTask.text = todo.task
-//            cell?.imageName = TodoCellCheckImage.uncheck
         }else{
             let todo = dataCompleted[indexPath.row]
             cell?.selectedTodo = todo
-//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: todo.task ?? "")
-//                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSRange(location: 0, length: attributeString.length))
-//            cell?.todoTask.attributedText = attributeString
-//            cell?.imageName = TodoCellCheckImage.check
         }
+        
+        cell?.selectedBackgroundView?.backgroundColor = .gray
+        cell?.selectedBackgroundView?.cornerRadius = 10
         cell?.referesh = referesh
         return cell ?? UITableViewCell()
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.addSubview(CustomeKit.getTableViewSeparator(cell: cell))
-        cell.cornerRadius(radius: 10)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -187,13 +186,10 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
        enableDeleteButton(shouldEnable: true)
     }
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        200
-//    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        200
     }
+    
 }
 
 extension TodosViewController: UITextFieldDelegate{
@@ -235,3 +231,18 @@ extension TodosViewController: UITextFieldDelegate{
         }
     }
 }
+
+//extension UITableViewCell{
+//    func addSeparatorView(){
+//        let thickness: CGFloat = 10.0
+//        let seprator = UIView(frame: CGRect(x: 0,
+//                                            y: self.frame.height-thickness,
+//                                            width: self.frame.width,
+//                                            height: thickness)
+//        )
+//        seprator.backgroundColor = .systemGray6 //UIColor.blue
+//        seprator.cornerRadius = 10 //(radius: 10)
+//        seprator.clipsToBounds = true
+//        self.addSubview(seprator)
+//    }
+//}

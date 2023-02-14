@@ -40,15 +40,35 @@
                             </label>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaM-FN-duV">
+                        <rect key="frame" x="0.0" y="83" width="320" height="10"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="6Q5-kf-V7S"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="ZaM-FN-duV" firstAttribute="top" secondItem="2dW-wM-Xvk" secondAttribute="bottom" constant="10" id="49h-Nf-lPN"/>
+                    <constraint firstItem="ZaM-FN-duV" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="LdK-Nn-KuE"/>
                     <constraint firstItem="2dW-wM-Xvk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PUl-gs-gB2"/>
-                    <constraint firstItem="2dW-wM-Xvk" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" constant="-20" id="Z9T-gB-pU7"/>
+                    <constraint firstItem="ZaM-FN-duV" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" id="Q32-Ch-T5R"/>
+                    <constraint firstItem="ZaM-FN-duV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="W8X-a1-oP8"/>
                     <constraint firstItem="2dW-wM-Xvk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="n0T-Xs-KDX"/>
                     <constraint firstItem="2dW-wM-Xvk" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-10" id="s1s-Y5-2xd"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="noteDateTime" destination="OFt-Sb-C5L" id="rtq-3r-5wz"/>
                 <outlet property="noteDescription" destination="Sua-EV-85I" id="iRp-4z-vjG"/>
@@ -60,6 +80,9 @@
     <resources>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

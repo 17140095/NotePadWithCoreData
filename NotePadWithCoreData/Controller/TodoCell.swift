@@ -63,7 +63,9 @@ class TodoCell: UITableViewCell {
           print("Already done")
         }else{
             selectedTodo?.isDone = true
+            CoreDB.getInstance().save()
             self.referesh?()
+            
             //tableview?.reloadData()
         }
     }
