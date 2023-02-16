@@ -31,57 +31,22 @@ class TodosViewController: UIViewController {
         
         todosTableView.delegate = self
         todosTableView.dataSource = self
-        todosTableView.cornerRadius = 10 //(radius: 10)
         todosTableView.register(TodoCell.nib, forCellReuseIdentifier: TodoCell.CELL_IDENTIFIER)
         todosTableView.sectionHeaderTopPadding = 0
                 
         addButton.tintColor = Constants.themeColor
         
         search.delegate = self
-        search.cornerRadius = 10 //(radius: search.frame.height/2)
-        
-        todosTableView.estimatedRowHeight = 200
-        
-        referesh()
+
     }
-    
+  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         referesh()
     }
     
     @IBAction func addTodoAction(_ sender: Any) {
-        let alert = UIAlertController(title: "Add Todo", message: nil, preferredStyle: .alert)
-        alert.view.tintColor = Constants.themeColor
-        alert.addTextField()
-        alert.textFields?[0].placeholder = "Write task"
-        alert.textFields?[0].accessibilityIdentifier = "addTodo"
-        alert.textFields?[0].delegate = self
-        
-        
-        addAlertAction = UIAlertAction(title: "Save", style: .default){_ in
-            let task = alert.textFields?[0].text?.trim()
-            if let t = task, !t.isEmpty{
-                if self.viewModel.addTodo(task: t){
-                   
-                    print("Todo save")
-                    self.referesh()
-                }else{
-                    print("Todo not save")
-                }
-                
-            }else{
-                
-                print("Alert task: \(task)")
-            }
-        }
-        addAlertAction?.isEnabled = false
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        
-        alert.addAction(addAlertAction!)
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true)
+        todoAlert(title: "Add Todo", updateTodo: nil)
     }
     
     @IBAction func deleteTodoAction(_ sender: Any) {
@@ -89,7 +54,7 @@ class TodosViewController: UIViewController {
             if viewModel.deleteTodo(todo: st){
                 referesh()
                 let alert = CustomeKit.getAlert(title: "Success", message: "Successfully delete todo.")
-                //alert.addAction(UIAlertAction(title: "Ok", style: <#T##UIAlertAction.Style#>))
+                alert.view.tintColor = Constants.themeColor
                 self.present(alert, animated: true)
             }else{
                 let alert = CustomeKit.getAlert(title: "Error", message: "There some error to delete todo")
@@ -97,6 +62,46 @@ class TodosViewController: UIViewController {
             }
         }
     }
+    
+    func todoAlert(title: String, updateTodo: Todo?){
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.view.tintColor = Constants.themeColor
+        alert.addTextField()
+        alert.textFields?[0].placeholder = "Write task"
+        alert.textFields?[0].accessibilityIdentifier = "addTodo"
+        alert.textFields?[0].delegate = self
+        
+        if let todo = updateTodo{
+            alert.textFields?[0].text = todo.task
+        }
+        
+        addAlertAction = UIAlertAction(title: "Save", style: .default){_ in
+            let task = alert.textFields?[0].text?.trim()
+            if let t = task, !t.isEmpty{
+                let res = (updateTodo != nil) ? (self.viewModel.updateTodo(todo: updateTodo!, task: t)) : (self.viewModel.addTodo(task: t))
+                if res {
+                    print("todo save")
+                    self.referesh()
+                }else{
+                    print("todo not save")
+                }
+            }else{
+                
+                print("Alert task: \(task)")
+            }
+        }
+        
+        addAlertAction?.isEnabled = false
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+        
+        alert.addAction(addAlertAction!)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true)
+        
+    }
+    
     func referesh(){
         data = viewModel.getTodos()
         dataCompleted = viewModel.getCompletedTodo(todos: data)
@@ -174,8 +179,6 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
             cell?.selectedTodo = todo
         }
         
-        cell?.selectedBackgroundView?.backgroundColor = .gray
-        cell?.selectedBackgroundView?.cornerRadius = 10
         cell?.referesh = referesh
         return cell ?? UITableViewCell()
     }
@@ -184,10 +187,10 @@ extension TodosViewController: UITableViewDelegate, UITableViewDataSource{
 
         selectedTodo = indexPath.section == 0 ? dataUnCompleted[indexPath.row] : dataCompleted[indexPath.row]
        enableDeleteButton(shouldEnable: true)
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        200
+        
+        if indexPath.section == 0{
+            todoAlert(title: "Update Todo", updateTodo: selectedTodo)
+        }
     }
     
 }
@@ -231,18 +234,3 @@ extension TodosViewController: UITextFieldDelegate{
         }
     }
 }
-
-//extension UITableViewCell{
-//    func addSeparatorView(){
-//        let thickness: CGFloat = 10.0
-//        let seprator = UIView(frame: CGRect(x: 0,
-//                                            y: self.frame.height-thickness,
-//                                            width: self.frame.width,
-//                                            height: thickness)
-//        )
-//        seprator.backgroundColor = .systemGray6 //UIColor.blue
-//        seprator.cornerRadius = 10 //(radius: 10)
-//        seprator.clipsToBounds = true
-//        self.addSubview(seprator)
-//    }
-//}

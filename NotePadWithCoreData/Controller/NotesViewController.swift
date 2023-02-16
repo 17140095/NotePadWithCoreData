@@ -31,12 +31,9 @@ class NotesViewController: UIViewController, UITextFieldDelegate {
         notesTableView.backgroundColor = UIColor.clear
         notesTableView.keyboardDismissMode = .onDrag
         notesTableView.keyboardDismissMode = .interactive
-        notesTableView.cornerRadius = 10 //(radius: 10)
-        
+     
         notesTableView.register(NoteWithTitleCell.nib, forCellReuseIdentifier: NoteWithTitleCell.CELL_IDENTIFIER)
         notesTableView.register(NoteWithoutTitleCell.nib, forCellReuseIdentifier: NoteWithoutTitleCell.CELL_IDENTIFIER)
-        
-        search.cornerRadius = 10 //(radius: search.frame.height/2)
       
         search.delegate = self
         
@@ -121,13 +118,6 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        cell.cornerRadius = 10 //(radius: 10)
-        //cell.addSeparatorView()
-      
-        
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let indexPathOfRow = notesTableView.indexPathForSelectedRow {
