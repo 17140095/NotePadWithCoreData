@@ -51,15 +51,16 @@ class TodosViewController: UIViewController {
     
     @IBAction func deleteTodoAction(_ sender: Any) {
         if let st = self.selectedTodo{
+            let alert = UIAlertController(title: "Success", message: "Successfully delete todo", preferredStyle: .alert)
+            alert.view.tintColor = Constants.themeColor
             if viewModel.deleteTodo(todo: st){
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
                 referesh()
-                let alert = CustomeKit.getAlert(title: "Success", message: "Successfully delete todo.")
-                alert.view.tintColor = Constants.themeColor
-                self.present(alert, animated: true)
             }else{
-                let alert = CustomeKit.getAlert(title: "Error", message: "There some error to delete todo")
-                self.present(alert, animated: true)
+                alert.title = "Error"
+                alert.message = "There some error to delete todo"
             }
+            self.present(alert, animated: true)
         }
     }
     

@@ -242,57 +242,6 @@
             </objects>
             <point key="canvasLocation" x="3481.679389312977" y="-682.3943661971831"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="p35-eT-VZn">
-            <objects>
-                <viewController id="U0s-8A-zjv" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KZT-PW-6kM">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DRc-5J-RuA">
-                                <rect key="frame" x="-1" y="769" width="394" height="48"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <tabBarItem systemItem="favorites" id="csU-fA-5dZ"/>
-                                    <tabBarItem systemItem="more" id="sFf-ZX-zd7"/>
-                                </items>
-                                <color key="tintColor" red="0.23921568630000001" green="0.69803921570000005" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
-                            </tabBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDa-P9-FJZ">
-                                <rect key="frame" x="20" y="103" width="353" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ojF-q7-yVW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <color key="textColor" red="0.23921568630000001" green="0.69803921570000005" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search notes.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-uu-5le">
-                                <rect key="frame" x="20" y="163" width="353" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="go"/>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="sRO-XL-7xs"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
-                        <constraints>
-                            <constraint firstItem="VF3-uu-5le" firstAttribute="leading" secondItem="FDa-P9-FJZ" secondAttribute="leading" id="0AX-bi-Wnf"/>
-                            <constraint firstItem="VF3-uu-5le" firstAttribute="top" secondItem="FDa-P9-FJZ" secondAttribute="bottom" constant="10" id="28T-99-PNu"/>
-                            <constraint firstItem="FDa-P9-FJZ" firstAttribute="leading" secondItem="sRO-XL-7xs" secondAttribute="leading" constant="20" id="5AA-w6-slz"/>
-                            <constraint firstItem="VF3-uu-5le" firstAttribute="trailing" secondItem="FDa-P9-FJZ" secondAttribute="trailing" id="OEx-Qp-WC4"/>
-                            <constraint firstItem="FDa-P9-FJZ" firstAttribute="top" secondItem="sRO-XL-7xs" secondAttribute="top" id="XAo-xL-8jT"/>
-                            <constraint firstItem="FDa-P9-FJZ" firstAttribute="trailing" secondItem="sRO-XL-7xs" secondAttribute="trailing" constant="-20" id="kSh-h2-fQS"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="d2U-GJ-CO8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lSc-R2-Z3I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1313.7404580152672" y="-254.22535211267606"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="bHE-HM-E1x">
             <objects>
@@ -311,24 +260,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2bx-La-e1f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1078.6259541984732" y="-253.52112676056339"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="shc-Xl-dcp">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jd4-HI-4Kk" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OVk-62-jd3">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="U0s-8A-zjv" kind="relationship" relationship="rootViewController" id="NUR-Fs-MO7"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NyC-l4-Uw8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2240.4580152671756" y="-254.22535211267606"/>
         </scene>
         <!--Notes-->
         <scene sceneID="Mve-sr-HdU">

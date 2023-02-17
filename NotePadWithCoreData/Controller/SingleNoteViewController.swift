@@ -43,35 +43,37 @@ class SingleNoteViewController: UIViewController {
     
     @IBAction func saveButtonAction(_ sender: Any) {
         print("Save Note tap")
-    
+        
+        let alert = UIAlertController(title: "Add Note", message: "Successfully saved note.", preferredStyle: .alert)
+        alert.view.tintColor = Constants.themeColor
+        
         if nil == note {
-
+            
             if viewModel.addNote(title: titlefield.text?.trim(), desc: textView.text.trim(), date: Date()) {
-                let alert = UIAlertController(title: "Add Note", message: "Successfully saved note.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
                     self.navigationController?.popViewController(animated: true)
                 })
-                present(alert, animated: true)
             }else{
-                let alert = CustomeKit.getAlert(title: "Error", message: "Note dose not saved. There some error.")
-                present(alert, animated: true)
+                alert.title = "Error"
+                alert.message = "Note does not saved. There some error."
             }
             
            
         }else{
            
             if viewModel.updateNote(note: note!, title: titlefield.text?.trim(), desc: textView.text.trim(), date: Date()) {
-                let alert = UIAlertController(title: "Update Note", message: "Successfully update note.", preferredStyle: .alert)
+                alert.title = "Update Note"
+                alert.message = "Successfully update note."
                 alert.addAction(UIAlertAction(title: "Ok", style: .default){ action in
                     self.navigationController?.popViewController(animated: true)
                 })
-                alert.view.tintColor = Constants.themeColor
-                present(alert, animated: true)
             }else{
-                let alert = CustomeKit.getAlert(title: "Error", message: "Note dose not update. There some error.")
-                present(alert, animated: true)
+                alert.title = "Error"
+                alert.message = "Note does not update. There some error"
             }
         }
+        
+        present(alert, animated: true)
         
     }
     
